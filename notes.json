@@ -1,0 +1,57 @@
+[
+	{
+		"id": 0,
+		"title": "Note 1",
+		"text": "My text note come on to app",
+		"date": "03/02/2018",
+		"color": {
+			"title": "blue",
+			"primary": "#448CFC",
+			"secundary": "#438BE8"
+		},
+	},
+	{
+		"id": 3,
+		"title": "Note 3",
+		"text": "My text note come on to app",
+		"date": "03/02/2018",
+		"color": {
+			"title": "green",
+			"primary": "#048444",
+			"secundary": "#048444"
+		},
+	},
+	{
+		"id": 4,
+		"title": "Note 4",
+		"text": "My text note come on to app",
+		"date": "03/02/2018",
+		"color": {
+			"title": "yellow",
+			"primary": "#F2AA18",
+			"secundary": "#F2AA18"
+		},
+	},
+	{
+		"id": 5,
+		"title": "Note 5",
+		"text": "My text note come on to app",
+		"date": "03/02/2018",
+		"color": {
+			"title": "yellow",
+			"primary": "#F2AA18",
+			"secundary": "#F2AA18"
+		},
+	},
+	{
+		"id": 6,
+		"title": "Note 6",
+		"text": "My text note come on to app",
+		"date": "03/02/2018",
+		"color": {
+			"title": "yellow",
+			"primary": "#F2AA18",
+			"secundary": "#F2AA18"
+		},
+	}
+]
