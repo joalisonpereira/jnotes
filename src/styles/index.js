@@ -1,7 +1,7 @@
 import { Platform,Dimensions } from 'react-native';
 
 const Colors = {
-	'primary': '#000',
+	'primary': '#D42434',
 	'text': '#FFF'
 };
 

@@ -6,8 +6,3 @@ export const loadNotes = () => ({
 	payload:{notes}
 });
 
-export const FILTER_NOTES = 'FILTER_NOTES';
-export const filterNotes = color => ({
-	type: FILTER_NOTES,
-	payload: {notes,color}
-});
