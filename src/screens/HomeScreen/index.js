@@ -4,12 +4,27 @@ import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { loadNotes,filterNotes } from 'src/store/actions';
+import NavRow from 'src/components/NavRow';
+import NavButton from 'src/components/NavButton';
 import styles from './styles';
 
 class HomeScreen extends Component {
   
-  static navigationOptions = {
-    title: 'Notas'
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Notas',
+      headerRight:(
+        <NavRow>
+          <NavButton
+            icon={{
+              type:'ionicon',
+              name:'md-add'
+            }}
+            onPress={() => navigation.navigate('AddNote')}
+          />
+        </NavRow>
+      ),
+    }
   };
 
   componentDidMount(){

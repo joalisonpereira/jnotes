@@ -7,7 +7,7 @@ const Colors = {
 
 const Fonts = {
 	title: 17.5,
-	text: 16.5
+	text: 17
 };
 
 const Metrics = {

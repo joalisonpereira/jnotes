@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 		paddingTop:3
 	},
 	rightIcon:{
-		marginRight: 5
+		marginRight: Metrics.baseMargin
 	}
 });
 
