@@ -6,7 +6,7 @@ import NavButton from 'src/components/NavButton';
 import { MESSAGES } from 'src/config';
 import styles from './styles';
 
-class EditNoteScreen extends Component {
+class ReadNoteScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -15,37 +15,28 @@ class EditNoteScreen extends Component {
     }
   }
 
-  static navigationOptions = {
-	 title : MESSAGES.EDIT_NOTE,
+  static navigationOptions = ({navigation}) => ({
+	 title : 'navigation.state.params.note.titleasdsakjdhsajkdsahkdsahdsadsadsadadadsa',
 	 headerRight:(
 		<NavRow>
 		  <NavButton
         icon={{
-          type:'ionicon',
-          name:'ios-lock'
+          type:'font-awesome',
+          name:'pencil'
         }}
-        onPress={() => console.log("Block note")}
+        onPress={() => navigation.navigate("EditNote",{note:navigation.state.params.note})}
+        fontSize={27}
       />
       <NavButton
         icon={{
-          type:'ionicon',
-          name:'ios-folder'
+          type:'font-awesome',
+          name:'trash'
         }}
-        onPress={() => console.log("Save note")}
-        fontSize={28}
+        onPress={() => console.log("Delete note")}
       />
     </NavRow>
 	 )
-  };
-
-  _handleChange(label,value){
-    this.setState({
-      note:{
-        ...this.state.note,
-        [label]:value
-      }
-    });
-  }
+  });
 
   render() {
     return (
@@ -53,21 +44,20 @@ class EditNoteScreen extends Component {
       	<TextInput
     			value={this.state.note.title}
     			style={styles.titleInput}
-    			placeholder="Editar Nota"
     			underlineColorAndroid={"transparent"}
-    			onChangeText={text => this._handleChange('title',text)}	
+          editable={false}
       	/>
       	<TextInput
       		value={this.state.note.text}
       		style={styles.textInput}
       		textAlignVertical="top"
     			underlineColorAndroid={"transparent"}
-    			onChangeText={text => this._handleChange('text',text)}
     			multiline
+          editable={false}
       	/>
       </View>
     );
   }
 }
 
-export default EditNoteScreen;
+export default ReadNoteScreen;

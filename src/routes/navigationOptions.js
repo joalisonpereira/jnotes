@@ -5,6 +5,9 @@ const navigationOptions = {
     headerStyle:{
       backgroundColor: Colors.primary
     },
+    headerTitleStyle:{
+    	width:'70%'
+    }
 };
 
 export default navigationOptions;

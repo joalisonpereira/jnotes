@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View,Text,TextInput } from 'react-native';
 
+import { MESSAGES } from 'src/config';
 import styles from './styles';
 
 class AddNoteScreen extends Component {
@@ -12,7 +13,7 @@ class AddNoteScreen extends Component {
   };
 
   static navigationOptions = {
-	   title : 'Nova Nota'
+	   title : MESSAGES.NEW_NOTE
   };
 
   _handleChange(label,value){

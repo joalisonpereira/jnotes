@@ -5,3 +5,4 @@ export const MESSAGES = {
 	NOTES_NOT_FOUND: 'Nenhuma nota encontrada',
 	EDIT_NOTE: 'Editar Nota'
 };
+

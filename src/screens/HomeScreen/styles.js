@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 	},
 	rightIcon:{
 		marginRight: Metrics.baseMargin
-	}
+	},
 });
 
 export default styles;
