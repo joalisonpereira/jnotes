@@ -5,18 +5,22 @@ import styles from './styles';
 
 class AddNoteScreen extends Component {
   state = {
-	title:'',
-	text:''
+  	 note:{
+      title:'',
+      text:''
+     }
   };
 
   static navigationOptions = {
-	title : 'Nova Nota'
+	   title : 'Nova Nota'
   };
 
   _handleChange(label,value){
   	this.setState({
-		...this.state,
-		[label]:value
+  		note:{
+        ...this.state.note,
+        [label]:value
+      }
   	});
   }
 
@@ -24,19 +28,19 @@ class AddNoteScreen extends Component {
     return (
       <View style={styles.container}>
       	<TextInput
-			value={this.state.title}
-			style={styles.titleInput}
-			placeholder="Nova Nota"
-			underlineColorAndroid={"transparent"}
-			onChangeText={text => this._handleChange('title',text)}	
+    			value={this.state.note.title}
+    			style={styles.titleInput}
+    			placeholder="Nova Nota"
+    			underlineColorAndroid={"transparent"}
+    			onChangeText={text => this._handleChange('title',text)}	
       	/>
       	<TextInput
-      		value={this.state.text}
+      		value={this.state.note.text}
       		style={styles.textInput}
       		textAlignVertical="top"
-			underlineColorAndroid={"transparent"}
-			onChangeText={text => this._handleChange('text',text)}
-			multiline
+    			underlineColorAndroid={"transparent"}
+    			onChangeText={text => this._handleChange('text',text)}
+    			multiline
       	/>
       </View>
     );

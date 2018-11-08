@@ -5,8 +5,8 @@ import { View } from 'react-native';
 
 import styles from './styles';
 
-const NavRow = ({children}) => (
-	<View style={styles.container}>
+const NavRow = ({children,containerStyle}) => (
+	<View style={[styles.container,containerStyle]}>
 		{children}
 	</View>
 );

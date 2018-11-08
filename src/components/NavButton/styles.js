@@ -3,11 +3,10 @@ import { Metrics } from 'src/styles';
 
 const styles = StyleSheet.create({
 	container:{
-		paddingHorizontal: 13
+		paddingHorizontal: 12,
+		height:'100%',
+		justifyContent: 'center',
 	},
-	icon:{
-		fontSize: 29
-	}
 });
 
 export default styles;

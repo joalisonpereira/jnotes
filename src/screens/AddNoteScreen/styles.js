@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Metrics,Fonts } from 'src/styles';
+import { Metrics,Fonts,Colors } from 'src/styles';
 
 const styles = StyleSheet.create({
 	container:{
@@ -12,14 +12,17 @@ const styles = StyleSheet.create({
 		elevation:1,
 		borderWidth:0,
 		paddingHorizontal:8,
-		fontSize: Fonts.title
+		fontSize: Fonts.title,
+		color: Colors.text,
+		backgroundColor: Colors.secundaryWhite
 	},
 	textInput:{
 		flex:1,
 		paddingTop: Metrics.doubleBaseMargin,
 		paddingHorizontal:8,
 		fontSize: Fonts.text,
-		backgroundColor:'#F0F0F0'
+		backgroundColor: '#FFF',
+		color: Colors.text
 	}
 });
 

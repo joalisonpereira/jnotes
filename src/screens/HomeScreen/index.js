@@ -3,7 +3,7 @@ import { View, Text, FlatList } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { loadNotes,filterNotes } from 'src/store/actions';
+import { loadNotes } from 'src/store/actions';
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
 import styles from './styles';
@@ -41,7 +41,7 @@ class HomeScreen extends Component {
           item.password ? 
           {} : {type:'ionicon',name:'ios-lock',style:styles.rightIcon}
         }
-        onPress={() => console.log(item)}
+        onPress={() => this.props.navigation.navigate('EditNote',{note:item})}
       />
     );
   }
@@ -57,7 +57,7 @@ class HomeScreen extends Component {
             <List containerStyle={styles.listContainer}>
               <FlatList
                 data={data}
-                renderItem={this._renderNote}
+                renderItem={item => this._renderNote(item)}
                 keyExtractor={item => String(item.id)}
               />
             </List>
@@ -72,8 +72,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  loadNotes,
-  filterNotes
+  loadNotes
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);

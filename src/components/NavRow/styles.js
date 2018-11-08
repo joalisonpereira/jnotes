@@ -4,9 +4,9 @@ import { Metrics } from 'src/styles';
 const styles = StyleSheet.create({
 	container:{
 		flexDirection: 'row',
-		alignItems: 'center',
-		height: '100%',
-		marginRight: 2
+		marginRight: 3,
+		height:'100%',
+		alignItems:'center'
 	}
 });
 

@@ -4,14 +4,14 @@ import { Icon } from 'react-native-elements';
 
 import styles from './styles';
 
-const NavButton = ({icon,onPress}) => (
+const NavButton = ({icon,onPress,fontSize=29}) => (
 	<TouchableWithoutFeedback onPress={onPress}>
 	  	<View style={styles.container}>
 	  		<Icon
 	  			type={icon.type}
 	  			name={icon.name}
 	  			color="#FFF"
-	  			iconStyle={styles.icon}
+	  			iconStyle={{fontSize}}
 	  		/>
 	  	</View>
 	</TouchableWithoutFeedback>
