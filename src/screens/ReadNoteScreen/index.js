@@ -16,16 +16,17 @@ class ReadNoteScreen extends Component {
   }
 
   static navigationOptions = ({navigation}) => ({
-	 title : 'navigation.state.params.note.titleasdsakjdhsajkdsahkdsahdsadsadsadadadsa',
+	 title : navigation.state.params.note.title,
 	 headerRight:(
 		<NavRow>
 		  <NavButton
         icon={{
           type:'font-awesome',
-          name:'pencil'
+          name:'pencil-square-o'
         }}
         onPress={() => navigation.navigate("EditNote",{note:navigation.state.params.note})}
-        fontSize={27}
+        containerStyle={styles.editButtonContainer}
+        fontSize={29}
       />
       <NavButton
         icon={{
@@ -54,6 +55,7 @@ class ReadNoteScreen extends Component {
     			underlineColorAndroid={"transparent"}
     			multiline
           editable={false}
+          scrollEnabled={true}
       	/>
       </View>
     );

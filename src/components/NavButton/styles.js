@@ -3,7 +3,7 @@ import { Metrics } from 'src/styles';
 
 const styles = StyleSheet.create({
 	container:{
-		paddingHorizontal: 14,
+		paddingHorizontal: 13,
 		height:'100%',
 		justifyContent: 'center',
 	},

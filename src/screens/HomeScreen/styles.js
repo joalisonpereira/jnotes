@@ -17,6 +17,17 @@ const styles = StyleSheet.create({
 	rightIcon:{
 		marginRight: Metrics.baseMargin
 	},
+	searchIconContainer:{
+		marginRight:4
+	},
+	addIconContainer:{
+		position: 'absolute',
+		right: Metrics.baseMargin,
+		bottom: Metrics.doubleBaseMargin,
+		elevation:5,
+		width:56,
+		height:56
+	},
 });
 
 export default styles;

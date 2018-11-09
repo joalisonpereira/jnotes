@@ -15,7 +15,8 @@ const Metrics = {
 	baseMargin: 5,
 	doubleBaseMargin: 10,
 	baseRadius: 3,
-	screenWidth: Dimensions.get('window').width
+	screenWidth: Dimensions.get('window').width,
+	headerPadding: Platform.OS === 'ios' ? 20 : 0
 };
 
 export { Colors, Fonts, Metrics };

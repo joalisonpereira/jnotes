@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
+import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { loadNotes } from 'src/store/actions';
+
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
 import { MESSAGES } from 'src/config';
+import { Colors } from 'src/styles';
 import styles from './styles';
 
 class HomeScreen extends Component {
@@ -18,11 +20,12 @@ class HomeScreen extends Component {
         <NavRow>
           <NavButton
             icon={{
-              type:'font-awesome',
-              name:'plus'
+              type:'ionicon',
+              name:'ios-search'
             }}
-            onPress={() => navigation.navigate('AddNote')}
-            fontSize={28}
+            containerStyle={styles.searchIconContainer}
+            fontSize={26}
+            onPress={() => console.log("Search note")}
           />
         </NavRow>
       ),
@@ -65,6 +68,15 @@ class HomeScreen extends Component {
               />
             </List>
         }
+        <Icon
+          raised
+          reverse
+          type='ionicon'
+          name='md-add'
+          color={Colors.primary}
+          containerStyle={styles.addIconContainer}
+          onPress={() => this.props.navigation.navigate("AddNote")} 
+        />
       </View>
     );
   }

@@ -29,10 +29,9 @@ class EditNoteScreen extends Component {
       <NavButton
         icon={{
           type:'ionicon',
-          name:'ios-folder'
+          name:'ios-briefcase'
         }}
         onPress={() => console.log("Save note")}
-        fontSize={28}
       />
     </NavRow>
 	 )
@@ -56,14 +55,15 @@ class EditNoteScreen extends Component {
     			placeholder="Editar Nota"
     			underlineColorAndroid={"transparent"}
     			onChangeText={text => this._handleChange('title',text)}	
-      	/>
-      	<TextInput
-      		value={this.state.note.text}
-      		style={styles.textInput}
-      		textAlignVertical="top"
-    			underlineColorAndroid={"transparent"}
-    			onChangeText={text => this._handleChange('text',text)}
-    			multiline
+          autoFocus
+        />
+        <TextInput
+          value={this.state.note.text}
+          style={styles.textInput}
+          textAlignVertical="top"
+          underlineColorAndroid={"transparent"}
+          onChangeText={text => this._handleChange('text',text)}
+          multiline
       	/>
       </View>
     );
