@@ -12,6 +12,13 @@ const notesReducer = (state = INITIAL_STATE,action) => {
 				data: action.payload.notes,
 				isLoading: false
 			};
+		case FILTER_NOTES:
+			return {
+				data: state.data.filter(note => {
+					return note.color===action.payload.color;
+				}),
+				isLoading: false
+			};
 		default:
 			return state;
 	}

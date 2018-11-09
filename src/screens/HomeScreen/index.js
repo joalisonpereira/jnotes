@@ -3,7 +3,8 @@ import { View, Text, FlatList } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { loadNotes } from 'src/store/actions';
+import { loadNotes,
+filterNotes } from 'src/store/actions';
 
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
@@ -27,29 +28,53 @@ class HomeScreen extends Component {
             fontSize={26}
             onPress={() => console.log("Search note")}
           />
+          <NavButton
+            icon={{
+              type:'ionicon',
+              name:'ios-list'
+            }}
+            onPress={() => navigation.state.params.loadNotes()}
+          />
         </NavRow>
       ),
     }
   };
 
   componentDidMount(){
-    this.props.loadNotes();
+    const { loadNotes } = this.props;
+    this.props.navigation.setParams({loadNotes});
+    loadNotes();
   }
 
   _renderNote({item}){
     return (
       <ListItem
+        leftIcon={{
+          type: 'font-awesome',
+          name: 'circle-thin',
+          color: item.color,
+          style: styles.leftIcon
+        }}
+        leftIconOnPress={() => this.props.filterNotes(item.color)}
         title={item.title}
         subtitle={item.date}
         subtitleStyle={styles.subtitle}
-        rightIcon={
-          item.password ? 
-          {} : {type:'ionicon',name:'ios-lock',style:styles.rightIcon}
-        }
+        rightIcon={this._selectRightIcon(item)}
         onPress={() => this.props.navigation.navigate('ReadNote',{note:item})}
         onLongPress={() => this.props.navigation.navigate('EditNote',{note:item})}
       />
     );
+  }
+
+  _selectRightIcon(item){
+    if(item.password){
+      return {};
+    }
+    return {
+      type:'ionicon',
+      name:'ios-lock',
+      style:styles.rightIcon
+    };
   }
 
   render() {
@@ -87,7 +112,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  loadNotes
+  loadNotes,
+  filterNotes
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);

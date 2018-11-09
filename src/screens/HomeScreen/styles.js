@@ -28,6 +28,11 @@ const styles = StyleSheet.create({
 		width:56,
 		height:56
 	},
+	leftIcon:{
+		fontSize:50,
+		marginLeft:2,
+		marginRight: 14,
+	}
 });
 
 export default styles;
