@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
 		flex:1,
 		backgroundColor:'#FFF',
 	},
+	searchIconContainer:{
+		marginTop:2
+	},
 	listContainer:{
 		marginTop:0,
 	},
@@ -16,9 +19,6 @@ const styles = StyleSheet.create({
 	},
 	rightIcon:{
 		marginRight: Metrics.baseMargin
-	},
-	searchIconContainer:{
-		marginRight:4
 	},
 	addIconContainer:{
 		position: 'absolute',

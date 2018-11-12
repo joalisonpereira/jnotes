@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, BackHandler } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -21,30 +21,67 @@ class HomeScreen extends Component {
         <NavRow>
           <NavButton
             icon={{
-              type:'ionicon',
-              name:'ios-search'
+              type:'octoicon',
+              name:'search'
             }}
             containerStyle={styles.searchIconContainer}
-            fontSize={26}
+            fontSize={28}
             onPress={() => console.log("Search note")}
           />
-          <NavButton
-            icon={{
-              type:'ionicon',
-              name:'ios-list'
-            }}
-            onPress={() => navigation.state.params.loadNotes()}
-          />
+          {
+            navigation.state.params && navigation.state.params.showListButton ?
+              <NavButton
+                icon={{
+                  type:'octoicon',
+                  name:'home'
+                }}
+                fontSize={28}
+                onPress={() => navigation.state.params.loadNotes()}
+              />
+            :
+              null
+          }
         </NavRow>
       ),
     }
   };
 
-  componentDidMount(){
-    const { loadNotes } = this.props;
-    this.props.navigation.setParams({loadNotes});
-    loadNotes();
+  _handlerBackPress(){
+    const { notes, loadNotes, navigation } = this.props;
+    if(notes.isFiltered){
+      return loadNotes();
+    }
+    if(navigation.pop()){
+      return;      
+    }
+    BackHandler.exitApp();
   }
+  
+  componentDidMount(){
+    const { navigation,loadNotes } = this.props;
+    navigation.setParams({loadNotes});
+    loadNotes();
+    
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      this._handlerBackPress();
+      return true;
+    });
+  }
+
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
+
+  componentDidUpdate(prevProps){
+    const { notes } = this.props;
+    if(notes.isFiltered !== prevProps.notes.isFiltered){
+      this.props.navigation.setParams({
+        showListButton: notes.isFiltered
+      });
+    }
+  }
+
 
   _renderNote({item}){
     return (

@@ -1,8 +1,9 @@
 import { LOAD_NOTES,FILTER_NOTES } from '../actions';
 
 const INITIAL_STATE = {
-	data:[],
-	isLoading:true
+	data: [],
+	isLoading: true,
+	isFiltered: false
 };
 
 const notesReducer = (state = INITIAL_STATE,action) => {
@@ -10,14 +11,16 @@ const notesReducer = (state = INITIAL_STATE,action) => {
 		case LOAD_NOTES:
 			return {
 				data: action.payload.notes,
-				isLoading: false
+				isLoading: false,
+				isFiltered: false
 			};
 		case FILTER_NOTES:
 			return {
 				data: state.data.filter(note => {
 					return note.color===action.payload.color;
 				}),
-				isLoading: false
+				isLoading: false,
+				isFiltered: true
 			};
 		default:
 			return state;
