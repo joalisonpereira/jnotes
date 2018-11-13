@@ -71,9 +71,9 @@ class HomeScreen extends Component {
 
   componentDidUpdate(prevProps){
     const { notes } = this.props;
-    if(notes.filterData !== prevProps.notes.filterData){
+    if(notes.isFiltered !== prevProps.notes.isFiltered){
       this.props.navigation.setParams({
-        showHomeButton: notes.filterData ? true : false
+        showHomeButton: notes.isFiltered ? true : false
       });
     }
   }
@@ -84,7 +84,7 @@ class HomeScreen extends Component {
 
   _handlerBackPress(){
     const { notes, resetNotes, navigation } = this.props;
-    if(notes.filterData){
+    if(notes.isFiltered){
       return resetNotes();
     }
     if(navigation.pop()){
@@ -107,7 +107,6 @@ class HomeScreen extends Component {
     this.props.navigation.setParams({
       searchBarStatus: !searchBar.active
     });
-
     this.props.resetNotes();
   }
 
@@ -137,15 +136,8 @@ class HomeScreen extends Component {
     );
   }
 
-  _getNotesData(){
-    const {notes:{data,filterData,searchData,isLoading}} = this.props;
-    if(filterData) return {data:filterData,isLoading};
-    if(searchData) return {data:searchData,isLoading};
-    return {data, isLoading};
-  }
-
   render() {
-    const { data,isLoading } = this._getNotesData();
+    const { dataToRender,isLoading } = this.props.notes;
     return(
       <View style={styles.container}>
         <SearchBar 
@@ -157,12 +149,12 @@ class HomeScreen extends Component {
           isLoading ?
             <Text>Carregando notas</Text>
           :
-            data.length == 0 ?
+            dataToRender.length == 0 ?
               <Text>Nenhuma nota encontrada</Text>
             :
               <List containerStyle={styles.listContainer}>
                 <FlatList
-                  data={data}
+                  data={dataToRender}
                   renderItem={item => this._renderNote(item)}
                   keyExtractor={item => String(item.id)}
                 />
