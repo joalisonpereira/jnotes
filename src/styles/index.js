@@ -4,6 +4,7 @@ const Colors = {
 	'primary': '#D42434',
 	'text': '#333',
 	'secundaryWhite':'#F4F4FC',
+	'placeholder': '#777'
 };
 
 const Fonts = {

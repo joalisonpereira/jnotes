@@ -11,3 +11,9 @@ export const filterNotes = color => ({
 	type: FILTER_NOTES,
 	payload: {color}
 });
+
+export const SEARCH_NOTES = 'SEARCH_NOTES';
+export const searchNotes = key => ({
+	type: SEARCH_NOTES,
+	payload: {key}
+});

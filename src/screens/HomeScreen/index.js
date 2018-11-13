@@ -3,18 +3,29 @@ import { View, Text, FlatList, BackHandler } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { loadNotes,filterNotes } from 'src/store/actions';
+import { loadNotes,filterNotes,searchNotes } from 'src/store/actions';
 
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
+import SearchBar from 'src/components/SearchBar';
+
 import { MESSAGES } from 'src/config';
 import { Colors } from 'src/styles';
 import styles from './styles';
 
 class HomeScreen extends Component {
   
-  static navigationOptions = ({navigation}) => {
+  state = {
+    searchBar:{
+      active: false
+    }
+  };
+
+  static navigationOptions = ({navigation:{state}}) => {
+    const params = state.params ? state.params : {};
+    const header = params.searchBarStatus ? {header:null} : {};
     return {
+      ...header,
       title: MESSAGES.TITLE,
       headerRight:(
         <NavRow>
@@ -23,50 +34,39 @@ class HomeScreen extends Component {
               type:'octoicon',
               name:'search'
             }}
-            containerStyle={styles.searchIconContainer}
             fontSize={28}
-            onPress={() => console.log("Search note")}
+            containerStyle={styles.searchIconContainer}
+            onPress={() => params.handleSearchBar()}
           />
           {
-            navigation.state.params && navigation.state.params.showListButton ?
+            params.showHomeButton &&
               <NavButton
                 icon={{
                   type:'octoicon',
                   name:'home'
                 }}
                 fontSize={28}
-                onPress={() => navigation.state.params.loadNotes()}
+                onPress={() => params.loadNotes()}
               />
-            :
-              null
           }
         </NavRow>
       ),
     }
   };
-
-  _handlerBackPress(){
-    const { notes, loadNotes, navigation } = this.props;
-    if(notes.isFiltered){
-      return loadNotes();
-    }
-    if(navigation.pop()){
-      return;      
-    }
-    BackHandler.exitApp();
-  }
   
   componentDidMount(){
     const { navigation,loadNotes } = this.props;
-    navigation.setParams({loadNotes});
-    loadNotes();
+    navigation.setParams({
+      loadNotes,
+      handleSearchBar: this._handleSearchBar
+    });
     
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       this._handlerBackPress();
       return true;
     });
+    loadNotes();
   }
-
 
   componentWillUnmount() {
     this.backHandler.remove();
@@ -76,11 +76,40 @@ class HomeScreen extends Component {
     const { notes } = this.props;
     if(notes.isFiltered !== prevProps.notes.isFiltered){
       this.props.navigation.setParams({
-        showListButton: notes.isFiltered
+        showHomeButton: notes.isFiltered
       });
     }
   }
 
+  _handlerBackPress(){
+    const { notes, loadNotes, navigation } = this.props;
+    if(notes.isFiltered){
+      return loadNotes();
+    }
+    if(navigation.pop()){
+      return;      
+    }
+    if(this.state.searchBar.active){
+      return this._handleSearchBar();
+    }
+    BackHandler.exitApp();
+  }
+
+  _handleSearchBar = () => {
+    const { searchBar } = this.state;
+    this.setState({
+      searchBar:{
+        ...searchBar,
+        active: !searchBar.active
+      }
+    });
+    this.props.navigation.setParams({
+      searchBarStatus: !searchBar.active
+    });
+
+    if(searchBar.active && !this.props.notes.isFiltered)
+      this.props.loadNotes();
+  }
 
   _renderNote({item}){
     return (
@@ -95,28 +124,22 @@ class HomeScreen extends Component {
         title={item.title}
         subtitle={item.date}
         subtitleStyle={styles.subtitle}
-        rightIcon={this._selectRightIcon(item)}
+        rightIcon={item.password ? {} : {type:'ionicon',name:'ios-lock', style:styles.rightIcon}}
         onPress={() => this.props.navigation.navigate('ReadNote',{note:item})}
         onLongPress={() => this.props.navigation.navigate('EditNote',{note:item})}
       />
     );
   }
 
-  _selectRightIcon(item){
-    if(item.password){
-      return {};
-    }
-    return {
-      type:'ionicon',
-      name:'ios-lock',
-      style:styles.rightIcon
-    };
-  }
-
   render() {
     let {notes:{data}} = this.props;
     return(
       <View style={styles.container}>
+        <SearchBar 
+          onChangeText={text => this.props.searchNotes(text)} 
+          onClose={() => this._handleSearchBar()} 
+          active={this.state.searchBar.active}
+        />
         {
           data.isLoading ?
             <Text>Carregando notas</Text>
@@ -149,7 +172,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loadNotes,
-  filterNotes
+  filterNotes,
+  searchNotes
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);

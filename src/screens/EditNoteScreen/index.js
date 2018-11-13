@@ -61,7 +61,7 @@ class EditNoteScreen extends Component {
         />
         <TextInput
           value={this.state.note.text}
-          style={[styles.textInput,{borderBottomWidth:8,borderBottomColor:this.state.note.color}]}
+          style={[styles.textInput,{borderBottomColor:this.state.note.color}]}
           textAlignVertical="top"
           underlineColorAndroid={"transparent"}
           onChangeText={text => this._handleChange('text',text)}

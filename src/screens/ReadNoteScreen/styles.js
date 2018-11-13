@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal:9,
 		fontSize: Fonts.text,
 		backgroundColor: '#FFF',
-		color: Colors.text
+		color: Colors.text,
+		borderBottomWidth: Metrics.baseMargin
 	},
 	editButtonContainer:{
 		paddingTop:4,

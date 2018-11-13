@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal:9,
 		fontSize: Fonts.title,
 		color: Colors.text,
-		backgroundColor: Colors.secundaryWhite
+		backgroundColor: Colors.secundaryWhite,
 	},
 	textInput:{
 		flex:1,
@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
 		paddingHorizontal:9,
 		fontSize: Fonts.text,
 		backgroundColor: '#FFF',
-		color: Colors.text
+		color: Colors.text,
+		borderBottomWidth: Metrics.baseMargin
 	}
 });
 

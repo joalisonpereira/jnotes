@@ -1,4 +1,4 @@
-import { LOAD_NOTES,FILTER_NOTES } from '../actions';
+import { LOAD_NOTES, FILTER_NOTES, SEARCH_NOTES } from '../actions';
 
 const INITIAL_STATE = {
 	data: [],
@@ -21,6 +21,14 @@ const notesReducer = (state = INITIAL_STATE,action) => {
 				}),
 				isLoading: false,
 				isFiltered: true
+			};
+		case SEARCH_NOTES:
+			return {
+				data: state.data.filter(note => {
+					//FILTER NOTES
+				}),
+				isLoading: false,
+				isFiltered: false
 			};
 		default:
 			return state;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View,Text,TouchableWithoutFeedback } from 'react-native';
+import { View,Text,TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import styles from './styles';
 
 const NavButton = ({icon,onPress,containerStyle,fontSize=27}) => (
-	<TouchableWithoutFeedback onPress={onPress}>
+	<TouchableOpacity onPress={onPress}>
 	  	<View style={[styles.container,containerStyle]}>
 	  		<Icon
 	  			type={icon.type}
@@ -14,7 +14,7 @@ const NavButton = ({icon,onPress,containerStyle,fontSize=27}) => (
 	  			iconStyle={{fontSize}}
 	  		/>
 	  	</View>
-	</TouchableWithoutFeedback>
+	</TouchableOpacity>
 );
 
 export default NavButton;
