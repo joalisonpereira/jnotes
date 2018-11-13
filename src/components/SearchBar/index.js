@@ -16,6 +16,7 @@ const SearchBar = ({value,onChangeText,onClose,active=false}) => {
         placeholder="Pesquisar"
         placeholderTextColor={Colors.placeholder}
         underlineColorAndroid={"transparent"}
+        autoFocus
       />
       <View style={styles.divider}/>
       <View style={styles.closeContainer}>

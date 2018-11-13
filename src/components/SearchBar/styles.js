@@ -8,7 +8,9 @@ const styles = StyleSheet.create({
 		flexDirection:'row',
 		height: Header.HEIGHT,
 		backgroundColor: '#FFF',
-		elevation:2
+		elevation: 2,
+		borderBottomWidth: .8,
+		borderBottomColor: '#DCDCDC'
 	},
 	input:{
 		flex: 1,

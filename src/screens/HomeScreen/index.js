@@ -3,7 +3,7 @@ import { View, Text, FlatList, BackHandler } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { loadNotes,filterNotes,searchNotes } from 'src/store/actions';
+import { loadNotes, resetNotes, filterNotes, searchNotes } from 'src/store/actions';
 
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
@@ -46,7 +46,7 @@ class HomeScreen extends Component {
                   name:'home'
                 }}
                 fontSize={28}
-                onPress={() => params.loadNotes()}
+                onPress={() => params.resetNotes()}
               />
           }
         </NavRow>
@@ -55,9 +55,9 @@ class HomeScreen extends Component {
   };
   
   componentDidMount(){
-    const { navigation,loadNotes } = this.props;
+    const { navigation,resetNotes } = this.props;
     navigation.setParams({
-      loadNotes,
+      resetNotes,
       handleSearchBar: this._handleSearchBar
     });
     
@@ -65,26 +65,27 @@ class HomeScreen extends Component {
       this._handlerBackPress();
       return true;
     });
-    loadNotes();
-  }
 
-  componentWillUnmount() {
-    this.backHandler.remove();
+    this.props.loadNotes();
   }
 
   componentDidUpdate(prevProps){
     const { notes } = this.props;
-    if(notes.isFiltered !== prevProps.notes.isFiltered){
+    if(notes.filterData !== prevProps.notes.filterData){
       this.props.navigation.setParams({
-        showHomeButton: notes.isFiltered
+        showHomeButton: notes.filterData ? true : false
       });
     }
   }
+  
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
 
   _handlerBackPress(){
-    const { notes, loadNotes, navigation } = this.props;
-    if(notes.isFiltered){
-      return loadNotes();
+    const { notes, resetNotes, navigation } = this.props;
+    if(notes.filterData){
+      return resetNotes();
     }
     if(navigation.pop()){
       return;      
@@ -107,11 +108,11 @@ class HomeScreen extends Component {
       searchBarStatus: !searchBar.active
     });
 
-    if(searchBar.active && !this.props.notes.isFiltered)
-      this.props.loadNotes();
+    this.props.resetNotes();
   }
 
   _renderNote({item}){
+    const { navigation } = this.props;
     return (
       <ListItem
         leftIcon={{
@@ -120,19 +121,31 @@ class HomeScreen extends Component {
           color: item.color,
           style: styles.leftIcon
         }}
-        leftIconOnPress={() => this.props.filterNotes(item.color)}
+        leftIconOnPress={() => {
+          if(!this.state.searchBar.active)
+            this.props.filterNotes(item.color)
+          else
+            navigation.navigate('ReadNote',{note:item})
+        }}
         title={item.title}
         subtitle={item.date}
         subtitleStyle={styles.subtitle}
         rightIcon={item.password ? {} : {type:'ionicon',name:'ios-lock', style:styles.rightIcon}}
-        onPress={() => this.props.navigation.navigate('ReadNote',{note:item})}
-        onLongPress={() => this.props.navigation.navigate('EditNote',{note:item})}
+        onPress={() => navigation.navigate('ReadNote',{note:item})}
+        onLongPress={() => navigation.navigate('EditNote',{note:item})}
       />
     );
   }
 
+  _getNotesData(){
+    const {notes:{data,filterData,searchData,isLoading}} = this.props;
+    if(filterData) return {data:filterData,isLoading};
+    if(searchData) return {data:searchData,isLoading};
+    return {data, isLoading};
+  }
+
   render() {
-    let {notes:{data}} = this.props;
+    const { data,isLoading } = this._getNotesData();
     return(
       <View style={styles.container}>
         <SearchBar 
@@ -141,16 +154,19 @@ class HomeScreen extends Component {
           active={this.state.searchBar.active}
         />
         {
-          data.isLoading ?
+          isLoading ?
             <Text>Carregando notas</Text>
           :
-            <List containerStyle={styles.listContainer}>
-              <FlatList
-                data={data}
-                renderItem={item => this._renderNote(item)}
-                keyExtractor={item => String(item.id)}
-              />
-            </List>
+            data.length == 0 ?
+              <Text>Nenhuma nota encontrada</Text>
+            :
+              <List containerStyle={styles.listContainer}>
+                <FlatList
+                  data={data}
+                  renderItem={item => this._renderNote(item)}
+                  keyExtractor={item => String(item.id)}
+                />
+              </List>
         }
         <Icon
           raised
@@ -172,6 +188,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loadNotes,
+  resetNotes,
   filterNotes,
   searchNotes
 };

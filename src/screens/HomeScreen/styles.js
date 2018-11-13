@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
 		marginTop:2
 	},
 	listContainer:{
-		marginTop:0,
+		marginTop: 0,
+		borderTopColor: '#FFF'
 	},
 	subtitle:{
 		fontSize:11,

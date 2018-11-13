@@ -1,9 +1,8 @@
-import { LOAD_NOTES, FILTER_NOTES, SEARCH_NOTES } from '../actions';
+import { LOAD_NOTES, RESET_NOTES, FILTER_NOTES, SEARCH_NOTES } from '../actions';
 
 const INITIAL_STATE = {
 	data: [],
-	isLoading: true,
-	isFiltered: false
+	isLoading: true
 };
 
 const notesReducer = (state = INITIAL_STATE,action) => {
@@ -11,24 +10,26 @@ const notesReducer = (state = INITIAL_STATE,action) => {
 		case LOAD_NOTES:
 			return {
 				data: action.payload.notes,
-				isLoading: false,
-				isFiltered: false
+				isLoading: false
+			};
+		case RESET_NOTES:
+			return {
+				data: state.data
 			};
 		case FILTER_NOTES:
 			return {
-				data: state.data.filter(note => {
+				...state,
+				filterData: state.data.filter(note => {
 					return note.color===action.payload.color;
-				}),
-				isLoading: false,
-				isFiltered: true
+				})
 			};
 		case SEARCH_NOTES:
+			const { key } = action.payload;
 			return {
-				data: state.data.filter(note => {
-					//FILTER NOTES
-				}),
-				isLoading: false,
-				isFiltered: false
+				...state,
+				searchData: state.data.filter(note => {
+					return note.title.toLowerCase().indexOf(key) > -1; 
+				})
 			};
 		default:
 			return state;

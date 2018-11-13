@@ -6,6 +6,11 @@ export const loadNotes = () => ({
 	payload: {notes}
 });
 
+export const RESET_NOTES = 'RESET_NOTES';
+export const resetNotes = () => ({
+	type: RESET_NOTES
+});
+
 export const FILTER_NOTES = 'FILTER_NOTES';
 export const filterNotes = color => ({
 	type: FILTER_NOTES,
