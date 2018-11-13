@@ -3,8 +3,7 @@ import { View, Text, FlatList, BackHandler } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { loadNotes,
-filterNotes } from 'src/store/actions';
+import { loadNotes,filterNotes } from 'src/store/actions';
 
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';

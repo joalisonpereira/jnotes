@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
 	titleInput:{
 		width:'100%',
 		height:52,
-		elevation:1,
+		elevation:2,
 		borderWidth:0,
 		paddingHorizontal:9,
 		fontSize: Fonts.title,
