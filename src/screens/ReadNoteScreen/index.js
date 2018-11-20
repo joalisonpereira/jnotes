@@ -44,13 +44,13 @@ class ReadNoteScreen extends Component {
       <View style={styles.container}>
       	<TextInput
     			value={this.state.note.title}
-    			style={styles.titleInput}
+    			style={[styles.titleInput,{borderBottomColor:this.state.note.color}]}
     			underlineColorAndroid={"transparent"}
           editable={false}
       	/>
       	<TextInput
       		value={this.state.note.text}
-      		style={[styles.textInput,{borderBottomColor:this.state.note.color}]}
+      		style={styles.textInput}
       		textAlignVertical="top"
     			underlineColorAndroid={"transparent"}
     			multiline

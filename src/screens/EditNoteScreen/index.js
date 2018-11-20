@@ -53,7 +53,7 @@ class EditNoteScreen extends Component {
       <View style={styles.container}>
       	<TextInput
     			value={this.state.note.title}
-    			style={styles.titleInput}
+    			style={[styles.titleInput,{borderBottomColor:this.state.note.color}]}
     			placeholder="Editar Nota"
     			underlineColorAndroid={"transparent"}
     			onChangeText={text => this._handleChange('title',text)}	
@@ -61,7 +61,7 @@ class EditNoteScreen extends Component {
         />
         <TextInput
           value={this.state.note.text}
-          style={[styles.textInput,{borderBottomColor:this.state.note.color}]}
+          style={[styles.textInput]}
           textAlignVertical="top"
           underlineColorAndroid={"transparent"}
           onChangeText={text => this._handleChange('text',text)}

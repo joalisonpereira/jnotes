@@ -8,13 +8,14 @@ const styles = StyleSheet.create({
 	},
 	titleInput:{
 		width:'100%',
-		height:52,
-		elevation:1,
-		borderWidth:0,
-		paddingHorizontal:8,
+		height: Metrics.titleInputHeight,
+		paddingHorizontal:9,
 		fontSize: Fonts.title,
 		color: Colors.text,
-		backgroundColor: Colors.secundaryWhite
+		backgroundColor: Colors.secundaryWhite,
+		borderColor: Colors.secundaryWhite,
+		borderWidth: Metrics.lineColorWidth,
+		elevation: 2
 	},
 	textInput:{
 		flex:1,
