@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
 	},
 	listContainer:{
 		marginTop: 0,
-		borderTopColor: '#FFF'
 	},
 	subtitle:{
 		fontSize:11,
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
 		bottom: Metrics.doubleBaseMargin,
 		elevation:5,
 		width:56,
-		height:56
+		height:56,
 	},
 	leftIcon:{
 		fontSize:50,

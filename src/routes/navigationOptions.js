@@ -7,7 +7,7 @@ const navigationOptions = {
     },
     headerTitleStyle:{
     	width:'70%'
-    }
+    },
 };
 
 export default navigationOptions;

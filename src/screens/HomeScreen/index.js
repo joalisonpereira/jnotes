@@ -18,11 +18,11 @@ class HomeScreen extends Component {
   state = {
     searchBar:{
       active: false
-    }
+    },
   };
 
   static navigationOptions = ({navigation:{state}}) => {
-    const params = state.params ? state.params : {};
+    const { params = {} } = state;
     const header = params.searchBarStatus ? {header:null} : {};
     return {
       ...header,
