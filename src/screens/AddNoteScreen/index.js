@@ -13,7 +13,7 @@ class AddNoteScreen extends Component {
      note:{
       title: '',
       text: '',
-      color: null
+      color: 'red'
      }
   };
 
@@ -41,7 +41,7 @@ class AddNoteScreen extends Component {
      )
   };
 
-  _handleChange(label,value){
+  _handlerChange(label,value){
     this.setState({
       note:{
         ...this.state.note,
@@ -50,7 +50,7 @@ class AddNoteScreen extends Component {
     });
   }
 
-  _handleChangeColor(color){
+  _handlerChangeColor(color){
     const { note } = this.state;
     this.setState({
       note:{
@@ -69,17 +69,17 @@ class AddNoteScreen extends Component {
           style={[styles.titleInput,note.color && {borderBottomColor:note.color}]}
           placeholder="Nova Nota"
           underlineColorAndroid={"transparent"}
-          onChangeText={text => this._handleChange('title',text)} 
+          onChangeText={text => this._handlerChange('title',text)} 
         />
         <TextInput
           value={note.text}
           style={styles.textInput}
           textAlignVertical="top"
           underlineColorAndroid={"transparent"}
-          onChangeText={text => this._handleChange('text',text)}
+          onChangeText={text => this._handlerChange('text',text)}
           multiline
         />
-        <ColorPallet action={color => this._handleChangeColor(color)} />
+        <ColorPallet action={color => this._handlerChangeColor(color)} />
       </View>
     );
   }

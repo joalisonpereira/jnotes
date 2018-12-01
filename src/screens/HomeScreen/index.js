@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, BackHandler } from 'react-native';
+import { View, Text, FlatList, BackHandler, ActivityIndicator } from 'react-native';
 import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -36,7 +36,7 @@ class HomeScreen extends Component {
             }}
             fontSize={28}
             containerStyle={styles.searchIconContainer}
-            onPress={() => params.handleSearchBar()}
+            onPress={() => params.handlerSearchBar()}
           />
           {
             params.showHomeButton &&
@@ -58,7 +58,7 @@ class HomeScreen extends Component {
     const { navigation,resetNotes } = this.props;
     navigation.setParams({
       resetNotes,
-      handleSearchBar: this._handleSearchBar
+      handlerSearchBar: this._handlerSearchBar
     });
     
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -91,12 +91,12 @@ class HomeScreen extends Component {
       return;      
     }
     if(this.state.searchBar.active){
-      return this._handleSearchBar();
+      return this._handlerSearchBar();
     }
     BackHandler.exitApp();
   }
 
-  _handleSearchBar = () => {
+  _handlerSearchBar = () => {
     const { searchBar } = this.state;
     this.setState({
       searchBar:{
@@ -142,15 +142,21 @@ class HomeScreen extends Component {
       <View style={styles.container}>
         <SearchBar 
           onChangeText={text => this.props.searchNotes(text)} 
-          onClose={() => this._handleSearchBar()} 
+          onClose={() => this._handlerSearchBar()} 
           active={this.state.searchBar.active}
         />
         {
           isLoading ?
-            <Text>Carregando notas</Text>
+            <View style={styles.notFoundText}>
+              <ActivityIndicator size="large" color="#F4DC44"/>
+            </View>
           :
             dataToRender.length == 0 ?
-              <Text>Nenhuma nota encontrada</Text>
+              <View style={styles.alternativeContainer}>
+                <Text style={styles.notFoundText}>
+                  { MESSAGES.NOTES_NOT_FOUND }
+                </Text>
+              </View>
             :
               <List containerStyle={styles.listContainer}>
                 <FlatList

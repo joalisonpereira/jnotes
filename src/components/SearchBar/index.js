@@ -13,29 +13,26 @@ class SearchBar extends Component{
 
   componentDidUpdate(prevProps) {
     if(prevProps.active !== this.props.active){
-      this.setState(
-        { active: !this.props.active },
-        () => {
-          Animated.spring(
-            this.state.animated,
-            { 
-              toValue: this.props.active ? 0 : -200,
-              useNativeDriver: true
-            }
-          ).start()
+      this.setState({ active: !this.props.active });
+      Animated.spring(
+        this.state.animated,
+        { 
+          toValue: this.props.active ? 0 : -200,
+          speed: 20,
+          useNativeDriver: true
         }
-      )
+      ).start()
     }
   }
 
   render() {
-    if(!this.props.active) return null;
-    const {value,onChangeText,onClose} = this.props;
+    const {value,onChangeText,onClose,active} = this.props;
+    if(!active) return null;
     return (
       <Animated.View style={[styles.container,{
         transform:[{
           translateY: this.state.animated
-        }]
+        }],
       }]}>
         <TextInput
           style={styles.input}

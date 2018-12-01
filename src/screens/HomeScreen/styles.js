@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { Metrics } from 'src/styles';
+import { Metrics,Colors } from 'src/styles';
 
 const styles = StyleSheet.create({
 	container:{
@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
 	},
 	listContainer:{
 		marginTop: 0,
+		borderTopColor:'#FFF'
 	},
 	subtitle:{
 		fontSize:11,
@@ -25,13 +26,22 @@ const styles = StyleSheet.create({
 		right: Metrics.baseMargin,
 		bottom: Metrics.doubleBaseMargin,
 		elevation:5,
-		width:56,
-		height:56,
+		width:55,
+		height:55,
 	},
 	leftIcon:{
 		fontSize:50,
 		marginLeft:2,
 		marginRight: 14,
+	},
+	alternativeContainer:{
+		flex: 1,
+		alignItems: 'center',
+		marginTop: 15
+	},
+	notFoundText:{
+		fontSize: 17,
+		color: Colors.text
 	}
 });
 

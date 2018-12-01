@@ -3,6 +3,8 @@ import { View,Text,TextInput } from 'react-native';
 
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
+import ColorPallet from 'src/components/ColorPallet';
+
 import { MESSAGES } from 'src/config';
 import styles from './styles';
 
@@ -39,11 +41,21 @@ class EditNoteScreen extends Component {
 	 )
   };
 
-  _handleChange(label,value){
+  _handlerChange(label,value){
     this.setState({
       note:{
         ...this.state.note,
         [label]:value
+      }
+    });
+  }
+
+  _handlerChangeColor(color){
+    const { note } = this.state;
+    this.setState({
+      note:{
+        ...note,
+        color
       }
     });
   }
@@ -56,7 +68,7 @@ class EditNoteScreen extends Component {
     			style={[styles.titleInput,{borderBottomColor:this.state.note.color}]}
     			placeholder="Editar Nota"
     			underlineColorAndroid={"transparent"}
-    			onChangeText={text => this._handleChange('title',text)}	
+    			onChangeText={text => this._handlerChange('title',text)}	
           autoFocus
         />
         <TextInput
@@ -64,9 +76,10 @@ class EditNoteScreen extends Component {
           style={[styles.textInput]}
           textAlignVertical="top"
           underlineColorAndroid={"transparent"}
-          onChangeText={text => this._handleChange('text',text)}
+          onChangeText={text => this._handlerChange('text',text)}
           multiline
       	/>
+        <ColorPallet action={color => this._handlerChangeColor(color)} />
       </View>
     );
   }
