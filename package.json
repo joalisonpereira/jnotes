@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "watchmen-reset": "echo 256 | sudo tee -a /proc/sys/fs/inotify/max_user_instancesecho 32768 | sudo tee -a /proc/sys/fs/inotify/max_queued_events echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches watchman shutdown-server",
+    "watchmen-reset": "echo 256 | sudo tee -a /proc/sys/fs/inotify/max_user_instances && echo 32768 | sudo tee -a /proc/sys/fs/inotify/max_queued_events && echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches && watchman shutdown-server",
     "test": "jest"
   },
   "dependencies": {
