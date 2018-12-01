@@ -9,37 +9,47 @@ import { MESSAGES } from 'src/config';
 import styles from './styles';
 
 class EditNoteScreen extends Component {
+  state = {
+  	note: this.props.navigation.state.params.note,
+    palletActive: false
+  };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-    	note: this.props.navigation.state.params.note
-    }
+  static navigationOptions = ({navigation}) => ({
+     title : MESSAGES.EDIT_NOTE,
+     headerRight:(
+      <NavRow>
+        <NavButton
+          icon={{type:'ionicon',name:'md-color-palette'}}
+          onPress={() => navigation.state.params.handlerPallet()}
+          containerStyle={{marginTop:1.5}}
+        />
+        <NavButton
+          icon={{type:'ionicon',name:'ios-lock'}}
+          containerStyle={{paddingHorizontal:18}}
+          onPress={() => console.log("Block note")}
+        />
+        <NavButton
+          icon={{type:'ionicon',name:'ios-folder'}}
+          fontSize={26}
+          containerStyle={{marginTop:1.5}}
+          onPress={() => console.log("Save note")}
+        />
+      </NavRow>
+     )
+  });
+
+  componentDidMount(){
+    const { navigation } = this.props;
+    navigation.setParams({
+      handlerPallet: this._handlerPallet
+    });
   }
 
-  static navigationOptions = {
-	 title : MESSAGES.EDIT_NOTE,
-	 headerRight:(
-		<NavRow>
-		  <NavButton
-        icon={{
-          type:'ionicon',
-          name:'ios-lock'
-        }}
-        onPress={() => console.log("Block note")}
-      />
-      <NavButton
-        icon={{
-          type:'ionicon',
-          name:'ios-folder'
-        }}
-        fontSize={26}
-        onPress={() => console.log("Save note")}
-        containerStyle={{marginTop:1.5}}
-      />
-    </NavRow>
-	 )
-  };
+  _handlerPallet = () => {
+    this.setState({
+      palletActive:!this.state.palletActive
+    });
+  }
 
   _handlerChange(label,value){
     this.setState({
@@ -79,7 +89,10 @@ class EditNoteScreen extends Component {
           onChangeText={text => this._handlerChange('text',text)}
           multiline
       	/>
-        <ColorPallet action={color => this._handlerChangeColor(color)} />
+        <ColorPallet 
+          action={color => this._handlerChangeColor(color)} 
+          active={this.state.palletActive}
+        />
       </View>
     );
   }

@@ -7,14 +7,20 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 		alignItems: 'center',
 		paddingVertical: Metrics.baseMargin,
-		backgroundColor: '#FFF'
+		backgroundColor: '#FFF',
+	},
+	disable:{
+		position: 'absolute',
+		left:0,
+		bottom:0,
+		right:0,
 	},
 	item:{
-		width: 45,
-		height: 45,
+		width: 43,
+		height: 43,
 		borderWidth:4,
 		marginBottom: Metrics.doubleBaseMargin,
-		borderRadius: 50
+		borderRadius: 50,
 	}
 });
 

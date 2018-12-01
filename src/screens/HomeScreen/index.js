@@ -4,7 +4,6 @@ import { List, ListItem, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { loadNotes, resetNotes, filterNotes, searchNotes } from 'src/store/actions';
-
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
 import SearchBar from 'src/components/SearchBar';
@@ -21,8 +20,8 @@ class HomeScreen extends Component {
     },
   };
 
-  static navigationOptions = ({navigation:{state}}) => {
-    const { params = {} } = state;
+  static navigationOptions = ({navigation}) => {
+    const { params = {} } = navigation.state;
     const header = params.searchBarStatus ? {header:null} : {};
     return {
       ...header,
@@ -30,10 +29,7 @@ class HomeScreen extends Component {
       headerRight:(
         <NavRow>
           <NavButton
-            icon={{
-              type:'octoicon',
-              name:'search'
-            }}
+            icon={{type:'octoicon',name:'search'}}
             fontSize={28}
             containerStyle={styles.searchIconContainer}
             onPress={() => params.handlerSearchBar()}
@@ -41,10 +37,7 @@ class HomeScreen extends Component {
           {
             params.showHomeButton &&
               <NavButton
-                icon={{
-                  type:'octoicon',
-                  name:'home'
-                }}
+                icon={{type:'octoicon',name:'home'}}
                 fontSize={28}
                 onPress={() => params.resetNotes()}
               />

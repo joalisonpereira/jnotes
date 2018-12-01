@@ -8,16 +8,15 @@ import styles from './styles';
 class SearchBar extends Component{
 
   state = {
-    animated: new Animated.Value(-200),
+    animated: new Animated.Value(-80),
   };
 
   componentDidUpdate(prevProps) {
     if(prevProps.active !== this.props.active){
-      this.setState({ active: !this.props.active });
       Animated.spring(
         this.state.animated,
         { 
-          toValue: this.props.active ? 0 : -200,
+          toValue: this.props.active ? 0 : -80,
           speed: 20,
           useNativeDriver: true
         }
@@ -30,10 +29,8 @@ class SearchBar extends Component{
     if(!active) return null;
     return (
       <Animated.View style={[styles.container,{
-        transform:[{
-          translateY: this.state.animated
-        }],
-      }]}>
+        transform:[{translateY: this.state.animated}
+      ]}]}>
         <TextInput
           style={styles.input}
           value={value} 
