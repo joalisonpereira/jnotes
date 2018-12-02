@@ -14,7 +14,7 @@ const NoteItem = ({item,onPress,onLongPress,leftIconOnPress}) => (
     title={item.title}
     subtitle={item.date}
     subtitleStyle={styles.subtitle}
-    rightIcon={item.password ? {} : {type:'ionicon',name:'ios-lock', style:styles.rightIcon}}
+    rightIcon={!item.password ? {} : {type:'ionicon',name:'ios-lock', style:styles.rightIcon}}
     onPress={onPress}
     onLongPress={onLongPress}
     leftIconOnPress={leftIconOnPress}

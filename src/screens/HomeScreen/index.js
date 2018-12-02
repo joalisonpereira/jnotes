@@ -107,13 +107,13 @@ class HomeScreen extends Component {
       <NoteItem
         item={item}
         onPress={() => {
-          if(item.password)
+          if(!item.password)
             navigate('ReadNote',{note:item})
           else
             this.setState({passwordDialog:true})
         }}
         onLongPress={() => {
-          if(item.password)
+          if(!item.password)
             navigate('EditNote',{note:item})
           else
             this.setState({passwordDialog:true})
@@ -139,7 +139,7 @@ class HomeScreen extends Component {
         />
         {
           isLoading ?
-            <View style={styles.notFoundText}>
+            <View style={styles.alternativeContainer}>
               <ActivityIndicator size="large" color="#F4DC44"/>
             </View>
           :

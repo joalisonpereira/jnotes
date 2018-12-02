@@ -68,7 +68,8 @@ class AddNoteScreen extends Component {
   _handlerChangeColor(color){
     const { note } = this.state;
     this.setState({
-      note:{...note,color}
+      note: {...note,color},
+      palletActive: false
     });
   }
 

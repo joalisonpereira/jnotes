@@ -65,8 +65,9 @@ class EditNoteScreen extends Component {
     this.setState({
       note:{
         ...note,
-        color
-      }
+        color,
+      },
+      palletActive: false
     });
   }
 
