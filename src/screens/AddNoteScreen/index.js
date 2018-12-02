@@ -70,7 +70,6 @@ class AddNoteScreen extends Component {
     this.setState({
       note:{...note,color}
     });
-    NavigationService.navigate("Home");
   }
 
   render() {

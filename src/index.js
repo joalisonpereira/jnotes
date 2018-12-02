@@ -1,12 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import Router from 'src/routes';
+import { Router,NavigationService } from 'src/routes';
 import store from 'src/store';
 
 const App = () => (
   <Provider store={store}>
-  	<Router/>
+  	<Router
+		ref={navigatorRef => {
+          NavigationService.setTopLevelNavigator(navigatorRef);
+        }}
+  	/>
   </Provider>
 );
 
