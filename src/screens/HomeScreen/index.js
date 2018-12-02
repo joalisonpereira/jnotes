@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, BackHandler, ActivityIndicator } from 'react-native';
-import { List, ListItem, Icon } from 'react-native-elements';
+import { List, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { loadNotes, resetNotes, filterNotes, searchNotes } from 'src/store/actions';
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
 import SearchBar from 'src/components/SearchBar';
+import NoteItem from 'src/components/NoteItem';
+import PasswordDialog from 'src/components/PasswordDialog';
 
 import { MESSAGES } from 'src/config';
 import { Colors } from 'src/styles';
@@ -15,9 +17,8 @@ import styles from './styles';
 class HomeScreen extends Component {
   
   state = {
-    searchBar:{
-      active: false
-    },
+    searchBar: false,
+    passwordDialog: false
   };
 
   static navigationOptions = ({navigation}) => {
@@ -77,14 +78,14 @@ class HomeScreen extends Component {
 
   _handlerBackPress(){
     const { notes, resetNotes, navigation } = this.props;
+    if(this.state.searchBar){
+      return this._handlerSearchBar();
+    }
     if(notes.isFiltered){
       return resetNotes();
     }
     if(navigation.pop()){
       return;      
-    }
-    if(this.state.searchBar.active){
-      return this._handlerSearchBar();
     }
     BackHandler.exitApp();
   }
@@ -92,39 +93,37 @@ class HomeScreen extends Component {
   _handlerSearchBar = () => {
     const { searchBar } = this.state;
     this.setState({
-      searchBar:{
-        ...searchBar,
-        active: !searchBar.active
-      }
+      searchBar:!searchBar
     });
     this.props.navigation.setParams({
-      searchBarStatus: !searchBar.active
+      searchBarStatus: !searchBar
     });
     this.props.resetNotes();
   }
 
-  _renderNote({item}){
-    const { navigation } = this.props;
+  _renderNoteItem({item}){
+    const { navigation:{navigate},filterNotes } = this.props;
     return (
-      <ListItem
-        leftIcon={{
-          type: 'font-awesome',
-          name: 'circle-thin',
-          color: item.color,
-          style: styles.leftIcon
-        }}
-        leftIconOnPress={() => {
-          if(!this.state.searchBar.active)
-            this.props.filterNotes(item.color)
+      <NoteItem
+        item={item}
+        onPress={() => {
+          if(item.password)
+            navigate('ReadNote',{note:item})
           else
-            navigation.navigate('ReadNote',{note:item})
+            this.setState({passwordDialog:true})
         }}
-        title={item.title}
-        subtitle={item.date}
-        subtitleStyle={styles.subtitle}
-        rightIcon={item.password ? {} : {type:'ionicon',name:'ios-lock', style:styles.rightIcon}}
-        onPress={() => navigation.navigate('ReadNote',{note:item})}
-        onLongPress={() => navigation.navigate('EditNote',{note:item})}
+        onLongPress={() => {
+          if(item.password)
+            navigate('EditNote',{note:item})
+          else
+            this.setState({passwordDialog:true})
+        }}
+        leftIconOnPress = {() => {
+          if(!this.state.searchBar)
+            filterNotes(item.color)
+          else
+            navigate('ReadNote',{note:item})
+        }}
       />
     );
   }
@@ -136,7 +135,7 @@ class HomeScreen extends Component {
         <SearchBar 
           onChangeText={text => this.props.searchNotes(text)} 
           onClose={() => this._handlerSearchBar()} 
-          active={this.state.searchBar.active}
+          active={this.state.searchBar}
         />
         {
           isLoading ?
@@ -154,11 +153,16 @@ class HomeScreen extends Component {
               <List containerStyle={styles.listContainer}>
                 <FlatList
                   data={dataToRender}
-                  renderItem={item => this._renderNote(item)}
+                  renderItem={item => this._renderNoteItem(item)}
                   keyExtractor={item => String(item.id)}
                 />
               </List>
         }
+        <PasswordDialog 
+          active={this.state.passwordDialog}
+          onCancel={() => this.setState({passwordDialog:false})}
+          onSubmit={() => {} }
+        />
         <Icon
           raised
           reverse
@@ -178,10 +182,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  loadNotes,
-  resetNotes,
-  filterNotes,
-  searchNotes
+  loadNotes, resetNotes, filterNotes,searchNotes 
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);

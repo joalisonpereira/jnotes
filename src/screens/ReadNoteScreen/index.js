@@ -25,7 +25,7 @@ class ReadNoteScreen extends Component {
           name:'pencil-square-o'
         }}
         onPress={() => navigation.navigate("EditNote",{note:navigation.state.params.note})}
-        containerStyle={styles.editButtonContainer}
+        containerStyle={{paddingTop:4,paddingHorizontal:18}}
         fontSize={27}
       />
       <NavButton

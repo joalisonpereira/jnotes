@@ -1,4 +1,4 @@
-const SYSTEM_COLORS = [
+export const SYSTEM_COLORS = [
 	{
 		title: 'blue',
 		color: '#0C6CD4' 
@@ -16,5 +16,3 @@ const SYSTEM_COLORS = [
 		color: '#0C6434'
 	},	
 ];
-
-export default SYSTEM_COLORS;

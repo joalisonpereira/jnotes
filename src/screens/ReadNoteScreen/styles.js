@@ -26,9 +26,6 @@ const styles = StyleSheet.create({
 		color: Colors.text,
 		borderBottomWidth: Metrics.baseMargin
 	},
-	editButtonContainer:{
-		paddingTop:4,
-	}
 });
 
 export default styles;

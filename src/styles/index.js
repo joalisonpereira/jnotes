@@ -1,10 +1,11 @@
 import { Platform,Dimensions } from 'react-native';
 
 const Colors = {
-	'primary': '#D42434',
-	'text': '#333',
-	'secundaryWhite':'#F4F4FC',
-	'placeholder': '#777'
+	primary: '#D42434',
+	text: '#333',
+	secundaryWhite: '#F4F4FC',
+	placeholder: '#777',
+	error: '#EC0C1C'
 };
 
 const Fonts = {
@@ -17,6 +18,7 @@ const Metrics = {
 	doubleBaseMargin: 10,
 	baseRadius: 3,
 	screenWidth: Dimensions.get('window').width,
+	screenHeight: Dimensions.get('window').height,
 	headerPadding: Platform.OS === 'ios' ? 20 : 0,
 	titleInputHeight: 56,
 	lineColorWidth: 2 

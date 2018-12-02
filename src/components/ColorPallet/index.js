@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Animated } from 'react-native';
 
-import SYSTEM_COLORS from 'src/config/systemColors';
+import { SYSTEM_COLORS } from 'src/config';
 import styles from './styles';
 
 class ColorPallet extends React.Component {

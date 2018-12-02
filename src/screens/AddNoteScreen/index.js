@@ -13,7 +13,8 @@ class AddNoteScreen extends Component {
     note:{
       title: '',
       text: '',
-      color: 'red'
+      color: 'red',
+      password: ''
     },
     palletActive: true
   };
@@ -69,6 +70,7 @@ class AddNoteScreen extends Component {
     this.setState({
       note:{...note,color}
     });
+    NavigationService.navigate("Home");
   }
 
   render() {

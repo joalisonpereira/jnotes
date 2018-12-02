@@ -13,14 +13,6 @@ const styles = StyleSheet.create({
 		marginTop: 0,
 		borderTopColor:'#FFF'
 	},
-	subtitle:{
-		fontSize:11,
-		fontWeight:'normal',
-		paddingTop:3
-	},
-	rightIcon:{
-		marginRight: Metrics.baseMargin
-	},
 	addIconContainer:{
 		position: 'absolute',
 		right: Metrics.baseMargin,
@@ -28,11 +20,6 @@ const styles = StyleSheet.create({
 		elevation:5,
 		width:55,
 		height:55,
-	},
-	leftIcon:{
-		fontSize:50,
-		marginLeft:2,
-		marginRight: 14,
 	},
 	alternativeContainer:{
 		flex: 1,
