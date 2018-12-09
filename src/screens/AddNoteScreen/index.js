@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View,Text,TextInput,Button } from 'react-native';
 
-import { MESSAGES } from 'src/config';
+import { MESSAGES, getColor } from 'src/config';
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
 import ColorPallet from 'src/components/ColorPallet';
@@ -74,12 +74,12 @@ class AddNoteScreen extends Component {
   }
 
   render() {
-    const { note } = this.state;    
+    const { note } = this.state;
     return (
       <View style={styles.container}>
         <TextInput
           value={note.title}
-          style={[styles.titleInput,note.color && {borderBottomColor:note.color}]}
+          style={[styles.titleInput,note.color && {borderBottomColor:getColor(note.color)}]}
           placeholder="Nova Nota"
           underlineColorAndroid={"transparent"}
           onChangeText={text => this._handlerChange('title',text)} 

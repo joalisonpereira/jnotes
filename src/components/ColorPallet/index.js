@@ -34,7 +34,7 @@ class ColorPallet extends React.Component {
 			]}>
 				{
 					SYSTEM_COLORS.map(item => (
-						<TouchableOpacity key={item.title} onPress={() => this.props.action(item.color)}>
+						<TouchableOpacity key={item.title} onPress={() => this.props.action(item.title)}>
 							<View style={[styles.item,{borderColor:item.color}]}/>
 						</TouchableOpacity>
 					))

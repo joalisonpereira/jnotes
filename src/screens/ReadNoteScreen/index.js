@@ -3,7 +3,7 @@ import { View,Text,TextInput } from 'react-native';
 
 import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
-import { MESSAGES } from 'src/config';
+import { MESSAGES, getColor } from 'src/config';
 import styles from './styles';
 
 class ReadNoteScreen extends Component {
@@ -44,7 +44,7 @@ class ReadNoteScreen extends Component {
       <View style={styles.container}>
       	<TextInput
     			value={this.state.note.title}
-    			style={[styles.titleInput,{borderBottomColor:this.state.note.color}]}
+    			style={[styles.titleInput,{borderBottomColor:getColor(this.state.note.color)}]}
     			underlineColorAndroid={"transparent"}
           editable={false}
       	/>

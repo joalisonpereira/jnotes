@@ -17,6 +17,6 @@ export const SYSTEM_COLORS = [
 	},	
 ];
 
-export function getColor(title){
+export const getColor = title => {
 	return SYSTEM_COLORS.filter(item => item.title===title)[0].color;
 }

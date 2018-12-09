@@ -5,7 +5,7 @@ import NavRow from 'src/components/NavRow';
 import NavButton from 'src/components/NavButton';
 import ColorPallet from 'src/components/ColorPallet';
 
-import { MESSAGES } from 'src/config';
+import { MESSAGES, getColor } from 'src/config';
 import styles from './styles';
 
 class EditNoteScreen extends Component {
@@ -76,7 +76,7 @@ class EditNoteScreen extends Component {
       <View style={styles.container}>
       	<TextInput
     			value={this.state.note.title}
-    			style={[styles.titleInput,{borderBottomColor:this.state.note.color}]}
+    			style={[styles.titleInput,{borderBottomColor:getColor(this.state.note.color)}]}
     			placeholder="Editar Nota"
     			underlineColorAndroid={"transparent"}
     			onChangeText={text => this._handlerChange('title',text)}	
