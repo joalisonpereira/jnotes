@@ -21,7 +21,7 @@ const Metrics = {
 	screenHeight: Dimensions.get('window').height,
 	headerPadding: Platform.OS === 'ios' ? 20 : 0,
 	titleInputHeight: 56,
-	lineColorWidth: 2 
+	lineColorWidth: 3 
 };
 
 export { Colors, Fonts, Metrics };

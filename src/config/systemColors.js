@@ -13,6 +13,10 @@ export const SYSTEM_COLORS = [
 	},
 	{
 		title: 'green',
-		color: '#0C6434'
+		color: '#24A44C'
 	},	
 ];
+
+export function getColor(title){
+	return SYSTEM_COLORS.filter(item => item.title===title)[0].color;
+}

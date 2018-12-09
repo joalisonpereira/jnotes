@@ -1,4 +1,9 @@
-import { LOAD_NOTES, RESET_NOTES, FILTER_NOTES, SEARCH_NOTES } from '../actions';
+import { 
+	LOAD_NOTES, 
+	RESET_NOTES, 
+	FILTER_NOTES, 
+	SEARCH_NOTES 
+} from '../actions';
 
 const INITIAL_STATE = {
 	data: [],
@@ -23,7 +28,7 @@ const notesReducer = (state = INITIAL_STATE,action) => {
 			return {
 				...state,
 				dataToRender: state.data.filter(note => {
-					return note.color===action.payload.color;
+					return note.color === action.payload.color;
 				}),
 				isFiltered: true
 			};

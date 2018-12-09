@@ -18,7 +18,11 @@ class HomeScreen extends Component {
   
   state = {
     searchBar: false,
-    passwordDialog: false
+    passwordDialog: {
+      active: false,
+      item: null,
+      route: null
+    }
   };
 
   static navigationOptions = ({navigation}) => {
@@ -110,13 +114,21 @@ class HomeScreen extends Component {
           if(!item.password)
             navigate('ReadNote',{note:item})
           else
-            this.setState({passwordDialog:true})
+            this.setState({passwordDialog:{
+              active: true,
+              route: 'ReadNote',
+              item
+            }})
         }}
         onLongPress={() => {
           if(!item.password)
             navigate('EditNote',{note:item})
           else
-            this.setState({passwordDialog:true})
+            this.setState({passwordDialog:{
+              active: true,
+              route: 'EditNote',
+              item
+            }})
         }}
         leftIconOnPress = {() => {
           if(!this.state.searchBar)
@@ -126,6 +138,18 @@ class HomeScreen extends Component {
         }}
       />
     );
+  }
+  //action ?
+  _onSubmitDialog(){
+    const { passwordDialog } = this.state;
+    const { item,route } = passwordDialog;
+    this.setState({
+      passwordDialog:{
+        ...passwordDialog,
+        active: false
+      }
+    });
+    this.props.navigation.navigate(route,{note:item});
   }
 
   render() {
@@ -159,9 +183,14 @@ class HomeScreen extends Component {
               </List>
         }
         <PasswordDialog 
-          active={this.state.passwordDialog}
-          onCancel={() => this.setState({passwordDialog:false})}
-          onSubmit={() => {} }
+          active={this.state.passwordDialog.active}
+          item={this.state.passwordDialog.item}
+          onSubmit={() => this._onSubmitDialog()}
+          onCancel={() => this.setState({
+            passwordDialog:{
+              active:false
+            }
+          })}
         />
         <Icon
           raised

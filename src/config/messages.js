@@ -11,5 +11,6 @@ export const DIALOG_PASSWORD = {
 	PLACEHOLDER: 'Senha',
 	CANCEL: 'Cancelar',
 	SUBMIT: 'Enviar',
-	ERROR_LENGTH: 'Digite mais de 5 caracteres'
+	ERROR_LENGTH: 'Digite mais de 5 caracteres',
+	WRONG_PASS: 'Senha incorreta' 
 }

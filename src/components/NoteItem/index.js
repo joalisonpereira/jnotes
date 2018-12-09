@@ -1,6 +1,7 @@
 import React from 'react';
 import { ListItem } from 'react-native-elements';
 
+import { getColor } from 'src/config';
 import styles from './styles';
 
 const NoteItem = ({item,onPress,onLongPress,leftIconOnPress}) => (
@@ -8,7 +9,7 @@ const NoteItem = ({item,onPress,onLongPress,leftIconOnPress}) => (
     leftIcon={{
       type: 'font-awesome',
       name: 'circle-thin',
-      color: item.color,
+      color: getColor(item.color),
       style: styles.leftIcon
     }}
     title={item.title}

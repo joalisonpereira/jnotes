@@ -13,8 +13,7 @@ const styles = StyleSheet.create({
 		fontSize: Fonts.title,
 		color: Colors.text,
 		backgroundColor: Colors.secundaryWhite,
-		borderColor: Colors.secundaryWhite,
-		borderWidth: Metrics.lineColorWidth,
+		borderBottomWidth: Metrics.lineColorWidth,
 		elevation: 2
 	},
 	textInput:{
