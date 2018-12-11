@@ -31,6 +31,7 @@ class PasswordDialog extends React.Component{
 
 	_handlerSubmit(){
 		const { password } = this.state;
+		const { item } = this.props;
 		if(password.length < 5){
 			return this.setState({
 				error:{
@@ -39,7 +40,7 @@ class PasswordDialog extends React.Component{
 				}
 			});
 		}
-		if(this.props.item.password !== password){
+		if(item && item.password !== password){
 			return this.setState({
 				error:{
 					active: true,
@@ -47,7 +48,7 @@ class PasswordDialog extends React.Component{
 				}
 			});
 		}
-		this.props.onSubmit();
+		this.props.onSubmit(password);
 	}
 
 	componentDidUpdate(prevProps){
@@ -59,18 +60,19 @@ class PasswordDialog extends React.Component{
 	}
 
 	render(){
-		const { active,onCancel,title } = this.props;
+		const { active,onCancel,item, block=false } = this.props;
 		const { password,error } = this.state;
 		return (
 			<Dialog.Container visible={active} contentStyle={styles.container}>
 				<Dialog.Title>
-					{ title ? title : DIALOG_PASSWORD.TITLE }
+					{ block ? DIALOG_PASSWORD.TITLE_BLOCK : DIALOG_PASSWORD.TITLE_UNBLOCK}
 				</Dialog.Title>
 				<View style={styles.innerContainer}>
 					<TextInput
 						value={password}
 						onChangeText={text => this._handlerChange('password',text)}
 						placeholder={DIALOG_PASSWORD.PLACEHOLDER}
+						placeholderTextColor={"#333"}
 						underlineColorAndroid={"#C1C1C1"}
 						maxLength={20}
 						secureTextEntry

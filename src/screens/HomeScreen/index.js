@@ -4,12 +4,7 @@ import { List, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { loadNotes, resetNotes, filterNotes, searchNotes } from 'src/store/actions';
-import NavRow from 'src/components/NavRow';
-import NavButton from 'src/components/NavButton';
-import SearchBar from 'src/components/SearchBar';
-import NoteItem from 'src/components/NoteItem';
-import PasswordDialog from 'src/components/PasswordDialog';
-
+import { NavRow, NavButton, SearchBar, NoteItem, PasswordDialog } from 'src/components';
 import { MESSAGES } from 'src/config';
 import { Colors } from 'src/styles';
 import styles from './styles';
@@ -139,7 +134,7 @@ class HomeScreen extends Component {
       />
     );
   }
-  //action ?
+  
   _onSubmitDialog(){
     const { passwordDialog } = this.state;
     const { item,route } = passwordDialog;
@@ -157,9 +152,9 @@ class HomeScreen extends Component {
     return(
       <View style={styles.container}>
         <SearchBar 
+          active={this.state.searchBar}
           onChangeText={text => this.props.searchNotes(text)} 
           onClose={() => this._handlerSearchBar()} 
-          active={this.state.searchBar}
         />
         {
           isLoading ?
@@ -187,8 +182,8 @@ class HomeScreen extends Component {
           item={this.state.passwordDialog.item}
           onSubmit={() => this._onSubmitDialog()}
           onCancel={() => this.setState({
-            passwordDialog:{
-              active:false
+            passwordDialog: {
+              active: false
             }
           })}
         />
@@ -211,7 +206,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  loadNotes, resetNotes, filterNotes,searchNotes 
+  loadNotes, resetNotes, filterNotes, searchNotes 
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);
