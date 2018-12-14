@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 		marginTop: 15
 	},
 	notFoundText:{
-		fontSize: 17,
+		fontSize: 15,
 		color: Colors.text
 	}
 });
