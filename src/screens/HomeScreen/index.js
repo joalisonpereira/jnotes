@@ -3,7 +3,7 @@ import { View, Text, FlatList, BackHandler, ActivityIndicator } from 'react-nati
 import { List, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
-import { loadNotes, resetNotes, filterNotes, searchNotes } from 'src/store/actions';
+import { loadNotes, filterNotes, searchNotes } from 'src/store/actions';
 import { NavRow, NavButton, SearchBar, NoteItem, PasswordDialog } from 'src/components';
 import { MESSAGES } from 'src/config';
 import { Colors } from 'src/styles';
@@ -39,7 +39,7 @@ class HomeScreen extends Component {
               <NavButton
                 icon={{type:'octoicon',name:'home'}}
                 fontSize={28}
-                onPress={() => params.resetNotes()}
+                onPress={() => params.loadNotes()}
               />
           }
         </NavRow>
@@ -48,9 +48,9 @@ class HomeScreen extends Component {
   };
   
   componentDidMount(){
-    const { navigation,resetNotes } = this.props;
+    const { navigation,loadNotes } = this.props;
     navigation.setParams({
-      resetNotes,
+      loadNotes,
       handlerSearchBar: this._handlerSearchBar
     });
     
@@ -76,12 +76,12 @@ class HomeScreen extends Component {
   }
 
   _handlerBackPress(){
-    const { notes, resetNotes, navigation } = this.props;
+    const { notes, loadNotes, navigation } = this.props;
     if(this.state.searchBar){
       return this._handlerSearchBar();
     }
     if(notes.isFiltered){
-      return resetNotes();
+      return loadNotes();
     }
     if(navigation.pop()){
       return;      
@@ -97,7 +97,7 @@ class HomeScreen extends Component {
     this.props.navigation.setParams({
       searchBarStatus: !searchBar
     });
-    this.props.resetNotes();
+    this.props.loadNotes();
   }
 
   _renderNoteItem({item}){
@@ -206,7 +206,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  loadNotes, resetNotes, filterNotes, searchNotes 
+  loadNotes, filterNotes, searchNotes 
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(HomeScreen);

@@ -1,14 +1,6 @@
-import notes from '../../../notes.json';
-
 export const LOAD_NOTES = 'LOAD_NOTES';
 export const loadNotes = () => ({
-	type: LOAD_NOTES,
-	payload: {notes}
-});
-
-export const RESET_NOTES = 'RESET_NOTES';
-export const resetNotes = () => ({
-	type: RESET_NOTES
+	type: LOAD_NOTES
 });
 
 export const FILTER_NOTES = 'FILTER_NOTES';

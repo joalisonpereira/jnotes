@@ -1,6 +1,5 @@
 import { 
 	LOAD_NOTES, 
-	RESET_NOTES, 
 	FILTER_NOTES, 
 	SEARCH_NOTES,
 	SAVE_NOTE,
@@ -18,14 +17,9 @@ const notesReducer = (state = INITIAL_STATE,action) => {
 	switch(action.type){
 		case LOAD_NOTES:
 			return {
-				data: action.payload.notes,
-				dataToRender: action.payload.notes,
-				isLoading: false
-			};
-		case RESET_NOTES:
-			return {
 				data: state.data,
-				dataToRender: state.data
+				dataToRender: state.data,
+				isLoading: false
 			};
 		case FILTER_NOTES:
 			return {

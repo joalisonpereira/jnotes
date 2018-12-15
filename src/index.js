@@ -1,16 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import { Router,NavigationService } from 'src/routes';
-import store from 'src/store';
+import { store,persistor } from 'src/store';
 
 const App = () => (
   <Provider store={store}>
-  	<Router
-		ref={navigatorRef => {
-          NavigationService.setTopLevelNavigator(navigatorRef);
-        }}
-  	/>
+  	<PersistGate loading={null} persistor={persistor}>
+  		<Router
+			ref={navigatorRef => {
+	          NavigationService.setTopLevelNavigator(navigatorRef);
+	        }}
+	  	/>
+  	</PersistGate>
   </Provider>
 );
 
