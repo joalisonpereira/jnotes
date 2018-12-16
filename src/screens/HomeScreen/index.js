@@ -126,7 +126,7 @@ class HomeScreen extends Component {
             }})
         }}
         leftIconOnPress = {() => {
-          if(!this.state.searchBar)
+          if(!this.state.searchBar && this.props.notes.data.length > 1)
             filterNotes(item.color)
           else
             navigate('ReadNote',{note:item})
