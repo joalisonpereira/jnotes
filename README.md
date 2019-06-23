@@ -1,3 +1,3 @@
 # Jnotes
 
-Annotations app
+Simple annotations app.
